@@ -6,6 +6,7 @@ import {AppComponent} from './app.component';
 import {NewsdataComponent} from './newsdata/newsdata.component';
 import {HttpClientModule} from '@angular/common/http';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
     declarations: [
@@ -17,7 +18,9 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
         AppRoutingModule,
         BrowserModule,
         HttpClientModule,
-        NgbModule
+        NgbModule,
+        ReactiveFormsModule,
+        FormsModule
     ],
     providers: [],
     bootstrap: [AppComponent]

@@ -7,7 +7,7 @@
         </button>
     </div>
     <div class="modal-body">
-        <p style="white-space: pre-wrap">{{selectedHitData}}</p>
+        <p *ngIf="selectedHitData" style="white-space: pre-wrap">{{selectedHitData}}</p>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-outline-dark" (click)="modal.close()">close</button>
@@ -15,6 +15,11 @@
 </ng-template>
 
 <div class="container-fluid">
+    <ng-form>
+        <div class="form-group form-inline">
+            Full text search: <input class="form-control ml-2" type="text" [formControl]="filter" />
+        </div>
+    </ng-form>
     <div class="card">
         <div *ngIf="hitsData">
             <table class="table table-striped">
@@ -27,8 +32,10 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr *ngFor="let hit of hitsData" (click)="onRowClick(content, hit)">
-                    <td>{{hit.title}}</td>
+                <tr *ngFor="let hit of filtered | async" (click)="onRowClick(content, hit)">
+                    <td>
+                        <ngb-highlight [result]="hit.title" [term]="filter.value"></ngb-highlight>
+                    </td>
                     <td>{{hit.url}}</td>
                     <td>{{hit.created_at}}</td>
                     <td>{{hit.author}}</td>
